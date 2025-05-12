@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Free Fire Event App</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: #ece5dd;
+    }
+
+    .header {
+      background-color: #075e54;
+      color: white;
+      padding: 15px;
+      text-align: center;
+      font-size: 20px;
+      font-weight: bold;
+      border-bottom: 2px solid #fff;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: auto;
+      padding: 10px;
+    }
+
+    .center {
+      text-align: center;
+      margin-top: 80px;
+    }
+
+    button {
+      padding: 14px 25px;
+      font-size: 16px;
+      margin: 10px;
+      border: none;
+      border-radius: 25px;
+      background-color: #25d366;
+      color: white;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #128c7e;
+    }
+
+    .chat-container {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .chat {
+      max-width: 80%;
+      padding: 10px 15px;
+      border-radius: 10px;
+      font-size: 15px;
+      line-height: 1.4;
+      position: relative;
+      animation: fadeIn 1s ease-out;
+    }
+
+    .admin {
+      background-color: #dcf8c6;
+      align-self: flex-end;
+      border-bottom-right-radius: 0;
+      border: 2px solid #4caf50;
+      animation: pulse 2s infinite;
+    }
+
+    .member {
+      background-color: #fff;
+      align-self: flex-start;
+      border-bottom-left-radius: 0;
+    }
+
+    .chat img {
+      max-width: 100%;
+      border-radius: 8px;
+      margin-top: 5px;
+    }
+
+    #eventForm {
+      margin-top: 15px;
+      display: none;
+    }
+
+    #eventForm input,
+    #eventForm textarea {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 15px;
+    }
+
+    input[type="file"] {
+      background: white;
+    }
+
+    .logout {
+      color: red;
+      cursor: pointer;
+      font-size: 16px;
+      margin-top: 20px;
+    }
+
+    .feedback {
+      font-size: 16px;
+      color: green;
+      font-weight: bold;
+      display: none;
+    }
+
+    .error-feedback {
+      font-size: 16px;
+      color: red;
+      font-weight: bold;
+      display: none;
+    }
+
+    .image-preview {
+      margin-top: 10px;
+      max-width: 100%;
+      max-height: 200px;
+      display: none;
+      object-fit: cover;
+      border-radius: 10px;
+    }
+
+    /* Animation for fadeIn */
+    @keyframes fadeIn {
+      0% { opacity: 0; }
+      100% { opacity: 1; }
+    }
+
+    /* Animation for pulse effect */
+    @keyframes pulse {
+      0% {
+        box-shadow: 0 0 5px 0 rgba(0, 255, 0, 0.3);
+      }
+      50% {
+        box-shadow: 0 0 10px 0 rgba(0, 255, 0, 0.6);
+      }
+      100% {
+        box-shadow: 0 0 5px 0 rgba(0, 255, 0, 0.3);
+      }
+    }
+
+    .developer-info {
+      text-align: center;
+      font-size: 18px;
+      font-weight: bold;
+      margin-top: 50px;
+      color: #333;
+      animation: bounceIn 1s ease-out;
+    }
+
+    /* Bounce in animation for developer info */
+    @keyframes bounceIn {
+      0% { transform: translateY(-50px); opacity: 0; }
+      60% { transform: translateY(15px); opacity: 1; }
+      100% { transform: translateY(0); }
+    }
+
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div id="roleSelection" class="center">
+      <h2>Select Role</h2>
+      <button onclick="selectRole('admin')">Admin</button>
+      <button onclick="selectRole('member')">Member</button>
+    </div>
+
+    <div id="adminLogin" class="center" style="display:none;">
+      <h3>Enter Admin Code</h3>
+      <input type="password" id="adminCode" placeholder="Admin Code"/>
+      <br><br>
+      <button onclick="loginAdmin()">Login</button>
+    </div>
+
+    <div id="memberLogin" class="center" style="display:none;">
+      <h3>Enter Member Information</h3>
+      <input type="text" id="memberName" placeholder="Name" />
+      <input type="text" id="memberNumber" placeholder="Phone Number" />
+      <br><br>
+      <button onclick="loginMember()">Login</button>
+    </div>
+
+    <div id="mainApp" style="display:none;">
+      <div class="header">FF Group</div>
+      <div id="logout" class="center">
+        <button class="logout" onclick="logout()">Logout</button>
+      </div>
+
+      <div id="eventForm">
+        <input type="text" id="eventTitle" placeholder="Event name" />
+        <textarea id="eventDesc" placeholder="Description"></textarea>
+        <input type="date" id="eventDate" />
+        <input type="file" id="eventImage" onchange="previewImage()" />
+        <img id="imagePreview" class="image-preview" />
+        <button onclick="postEvent()">Post Event</button>
+      </div>
+
+      <div id="eventList" class="chat-container"></div>
+
+      <div id="successMessage" class="feedback">Event posted successfully!</div>
+      <div id="errorMessage" class="error-feedback">Please fill in all fields.</div>
+    </div>
+  </div>
+
+  <div class="developer-info">
+    develop by SKM YT
+  </div>
+
+  <script>
+    const correctAdminCode = "0160467779501918548930";
+    let role = "";
+
+    function selectRole(selected) {
+      role = selected;
+      document.getElementById("roleSelection").style.display = "none";
+      if (role === "admin") {
+        document.getElementById("adminLogin").style.display = "block";
+      } else {
+        document.getElementById("memberLogin").style.display = "block";
+      }
+    }
+
+    function loginAdmin() {
+      const inputCode = document.getElementById("adminCode").value;
+      if (inputCode === correctAdminCode) {
+        localStorage.setItem("role", "admin");
+        showApp();
+      } else {
+        alert("Wrong Code!");
+      }
+    }
+
+    function loginMember() {
+      const name = document.getElementById("memberName").value;
+      const number = document.getElementById("memberNumber").value;
+      if (name && number) {
+        localStorage.setItem("role", "member");
+        localStorage.setItem("name", name);
+        localStorage.setItem("number", number);
+        showApp();
+      } else {
+        alert("Please enter valid details");
+      }
+    }
+
+    function showApp() {
+      document.getElementById("adminLogin").style.display = "none";
+      document.getElementById("memberLogin").style.display = "none";
+      document.getElementById("mainApp").style.display = "block";
+      displayEvents();
+
+      const savedRole = localStorage.getItem("role");
+      if (savedRole === "admin") {
+        document.getElementById("eventForm").style.display = "block";
+      }
+    }
+
+    function previewImage() {
+      const file = document.getElementById("eventImage").files[0];
+      const reader = new FileReader();
+      reader.onload = function (e) {
+        document.getElementById("imagePreview").style.display = "block";
+        document.getElementById("imagePreview").src = e.target.result;
+      };
+      reader.readAsDataURL(file);
+    }
+
+    function postEvent() {
+      const title = document.getElementById("eventTitle").value;
+      const desc = document.getElementById("eventDesc").value;
+      const date = document.getElementById("eventDate").value;
+      const imageInput = document.getElementById("eventImage");
+      const reader = new FileReader();
+
+      if (!title || !desc || !date || !imageInput.files[0]) {
+        document.getElementById("errorMessage").style.display = "block";
+        return;
+      }
+
+      reader.onload = function (e) {
+        const event = { title, desc, date, image: e.target.result, by: "Admin" };
+        const events = JSON.parse(localStorage.getItem("events") || "[]");
+        events.unshift(event);
+        localStorage.setItem("events", JSON.stringify(events));
+        displayEvents();
+
+        document.getElementById("successMessage").style.display = "block";
+        setTimeout(() => {
+          document.getElementById("successMessage").style.display = "none";
+        }, 3000);
+      };
+
+      reader.readAsDataURL(imageInput.files[0]);
+    }
+
+    function displayEvents() {
+      const events = JSON.parse(localStorage.getItem("events") || "[]");
+      const list = document.getElementById("eventList");
+      list.innerHTML = "";
+      events.forEach(e => {
+        const div = document.createElement("div");
+        div.className = "chat " + (e.by === "Admin" ? "admin" : "member");
+        div.innerHTML = `<strong>${e.title}</strong><br>${e.desc}<br><em>${e.date}</em><br><img src="${e.image}" />`;
+        list.appendChild(div);
+      });
+    }
+
+    function logout() {
+      localStorage.removeItem("role");
+      localStorage.removeItem("name");
+      localStorage.removeItem("number");
+      location.reload();
+    }
+
+    window.onload = () => {
+      const savedRole = localStorage.getItem("role");
+      if (savedRole) {
+        role = savedRole;
+        showApp();
+      }
+    };
+  </script>
+</body>
+</html
