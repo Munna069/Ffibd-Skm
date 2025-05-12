@@ -46,7 +46,7 @@
 ## Developer Info
 
 **Developed by:** SKM YT  
-**Contact:** +8801604677795  
+**Contact:** admin pss লাগলে [click Here](wa.me/+01604677795)
 **Facebook:** [Click Here](https://www.facebook.com/share/17h41dqbRS/?mibextid=qi2Omg)
 
 ---
