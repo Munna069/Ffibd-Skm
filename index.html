@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>FF Event App</title>
+  <link rel="stylesheet" href="style.css" />
+  <script defer src="app.js"></script>
+</head>
+<body>
+  <div class="container">
+    <h2>Login Panel</h2>
+    <div class="tab-buttons">
+      <button id="adminTab" class="active">Admin</button>
+      <button id="memberTab">Member</button>
+    </div>
+    <div id="errorMsg"></div>
+    <div id="adminForm">
+      <div class="form-group">
+        <label for="adminPass">Admin Password</label>
+        <input type="password" id="adminPass" placeholder="Enter Admin Password" />
+      </div>
+      <button class="submit-btn" onclick="adminLogin()">Login as Admin</button>
+    </div>
+    <div id="memberForm" style="display:none;">
+      <div class="form-group">
+        <label for="memberEmail">Email</label>
+        <input type="email" id="memberEmail" placeholder="Enter Email" />
+      </div>
+      <div class="form-group">
+        <label for="memberPassword">Password</label>
+        <input type="password" id="memberPassword" placeholder="Enter Password" />
+      </div>
+      <button class="submit-btn" onclick="memberLogin()">Login as Member</button>
+    </div>
+    <div class="info-text">Need help? <span onclick="contactWhatsapp()">Contact via WhatsApp</span></div>
+  </div>
+</body>
+</html>

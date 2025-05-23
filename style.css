@@ -1,0 +1,114 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Hind+Siliguri&display=swap');
+body {
+  font-family: 'Hind Siliguri', sans-serif;
+  background: linear-gradient(135deg, #6b73ff 0%, #000dff 100%);
+  color: #fff;
+  margin: 0; padding: 0;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.container {
+  background: rgba(0, 0, 50, 0.85);
+  padding: 30px 40px;
+  border-radius: 15px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+  width: 400px;
+  max-width: 95vw;
+}
+h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  font-weight: 700;
+  letter-spacing: 1.2px;
+  color: #f0f8ff;
+  text-shadow: 1px 1px 4px #0033cc;
+}
+.tab-buttons {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 25px;
+}
+.tab-buttons button {
+  background: #0033cc;
+  border: none;
+  color: #cce0ff;
+  padding: 12px 25px;
+  margin: 0 6px;
+  font-weight: 700;
+  border-radius: 25px;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(0, 51, 204, 0.6);
+  transition: background 0.3s ease, color 0.3s ease;
+}
+.tab-buttons button.active,
+.tab-buttons button:hover {
+  background: #00c6ff;
+  color: #003366;
+  box-shadow: 0 6px 15px #00c6ff;
+}
+.form-group {
+  margin-bottom: 18px;
+}
+label {
+  display: block;
+  margin-bottom: 6px;
+  font-weight: 600;
+  color: #cce0ff;
+}
+input[type="text"],
+input[type="password"],
+input[type="email"] {
+  width: 100%;
+  padding: 12px 15px;
+  border-radius: 8px;
+  border: none;
+  outline: none;
+  font-size: 16px;
+  background: #001a66;
+  color: #e6f0ff;
+  box-shadow: inset 1px 1px 5px #000d99;
+  transition: background 0.3s ease;
+}
+input:focus {
+  background: #0033cc;
+  box-shadow: 0 0 8px #3399ff;
+  color: #fff;
+}
+#errorMsg {
+  color: #ff4d4d;
+  margin-bottom: 15px;
+  font-weight: 700;
+  text-align: center;
+}
+button.submit-btn {
+  width: 100%;
+  padding: 14px 0;
+  background: linear-gradient(90deg, #00c6ff 0%, #0072ff 100%);
+  border: none;
+  border-radius: 12px;
+  font-size: 18px;
+  font-weight: 700;
+  color: white;
+  cursor: pointer;
+  box-shadow: 0 4px 15px #0072ff;
+  transition: background 0.4s ease, box-shadow 0.4s ease;
+}
+button.submit-btn:hover {
+  background: linear-gradient(90deg, #0072ff 0%, #00c6ff 100%);
+  box-shadow: 0 6px 20px #3399ff;
+}
+.info-text {
+  color: #99ccff;
+  font-weight: 600;
+  font-size: 14px;
+  margin-top: 12px;
+  text-align: center;
+}
+.info-text span {
+  color: #cce0ff;
+  text-decoration: underline;
+  cursor: pointer;
+}
