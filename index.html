@@ -1,39 +1,44 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>FF Event App</title>
   <link rel="stylesheet" href="style.css" />
-  <script defer src="app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-storage.js"></script>
 </head>
 <body>
   <div class="container">
-    <h2>Login Panel</h2>
+    <h2>FF Event App</h2>
     <div class="tab-buttons">
-      <button id="adminTab" class="active">Admin</button>
-      <button id="memberTab">Member</button>
+      <button class="active" onclick="showAdminLogin()">Admin</button>
+      <button onclick="showMemberLogin()">Member</button>
     </div>
     <div id="errorMsg"></div>
-    <div id="adminForm">
+    <div id="adminLoginForm" style="display: block;">
       <div class="form-group">
-        <label for="adminPass">Admin Password</label>
-        <input type="password" id="adminPass" placeholder="Enter Admin Password" />
+        <label>Admin Password</label>
+        <input type="password" id="adminPassword" placeholder="Enter Admin Password">
       </div>
       <button class="submit-btn" onclick="adminLogin()">Login as Admin</button>
     </div>
-    <div id="memberForm" style="display:none;">
+    <div id="memberLoginForm" style="display: none;">
       <div class="form-group">
-        <label for="memberEmail">Email</label>
-        <input type="email" id="memberEmail" placeholder="Enter Email" />
+        <label>Email</label>
+        <input type="email" id="memberEmail" placeholder="Enter Email">
       </div>
       <div class="form-group">
-        <label for="memberPassword">Password</label>
-        <input type="password" id="memberPassword" placeholder="Enter Password" />
+        <label>Password</label>
+        <input type="password" id="memberPassword" placeholder="Enter Password">
       </div>
       <button class="submit-btn" onclick="memberLogin()">Login as Member</button>
     </div>
-    <div class="info-text">Need help? <span onclick="contactWhatsapp()">Contact via WhatsApp</span></div>
+    <p class="info-text">Developer: <strong>SKMYT</strong></p>
   </div>
+  <script src="script.js"></script>
 </body>
 </html>

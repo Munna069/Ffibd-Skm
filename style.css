@@ -41,7 +41,6 @@ h2 {
   border-radius: 25px;
   cursor: pointer;
   box-shadow: 0 4px 10px rgba(0, 51, 204, 0.6);
-  transition: background 0.3s ease, color 0.3s ease;
 }
 .tab-buttons button.active,
 .tab-buttons button:hover {
@@ -58,9 +57,8 @@ label {
   font-weight: 600;
   color: #cce0ff;
 }
-input[type="text"],
-input[type="password"],
-input[type="email"] {
+input[type="email"],
+input[type="password"] {
   width: 100%;
   padding: 12px 15px;
   border-radius: 8px;
@@ -70,7 +68,6 @@ input[type="email"] {
   background: #001a66;
   color: #e6f0ff;
   box-shadow: inset 1px 1px 5px #000d99;
-  transition: background 0.3s ease;
 }
 input:focus {
   background: #0033cc;
@@ -83,7 +80,7 @@ input:focus {
   font-weight: 700;
   text-align: center;
 }
-button.submit-btn {
+.submit-btn {
   width: 100%;
   padding: 14px 0;
   background: linear-gradient(90deg, #00c6ff 0%, #0072ff 100%);
@@ -94,9 +91,8 @@ button.submit-btn {
   color: white;
   cursor: pointer;
   box-shadow: 0 4px 15px #0072ff;
-  transition: background 0.4s ease, box-shadow 0.4s ease;
 }
-button.submit-btn:hover {
+.submit-btn:hover {
   background: linear-gradient(90deg, #0072ff 0%, #00c6ff 100%);
   box-shadow: 0 6px 20px #3399ff;
 }
@@ -106,9 +102,4 @@ button.submit-btn:hover {
   font-size: 14px;
   margin-top: 12px;
   text-align: center;
-}
-.info-text span {
-  color: #cce0ff;
-  text-decoration: underline;
-  cursor: pointer;
 }
